@@ -597,33 +597,28 @@ class PaginatedDataTableState extends State<AdvancedPaginatedDataTable> {
                       ),
                     ),
                   ),
-                SingleChildScrollView(
-                  controller: scroller,
-                  scrollDirection: Axis.horizontal,
-                  dragStartBehavior: widget.dragStartBehavior,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                    child: DataTable(
-                      key: _tableKey,
-                      columns: widget.columns,
-                      sortColumnIndex: widget.sortColumnIndex,
-                      sortAscending: widget.sortAscending,
-                      onSelectAll: widget.onSelectAll,
-                      // Make sure no decoration is set on the DataTable
-                      // from the theme, as its already wrapped in a Card.
-                      decoration: const BoxDecoration(),
-                      dataRowHeight: widget.dataRowHeight,
-                      headingRowHeight: widget.headingRowHeight,
-                      horizontalMargin: widget.horizontalMargin,
-                      columnSpacing: widget.columnSpacing,
-                      showCheckboxColumn: widget.showCheckboxColumn,
-                      showBottomBorder: true,
-                      rows: loading
-                          ? loadingRows(
-                              widget.source.lastDetails?.rows.length ?? widget.rowsPerPage,
-                            )
-                          : _getRows(_firstRowIndex, widget.rowsPerPage),
-                    ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                  child: DataTable(
+                    key: _tableKey,
+                    columns: widget.columns,
+                    sortColumnIndex: widget.sortColumnIndex,
+                    sortAscending: widget.sortAscending,
+                    onSelectAll: widget.onSelectAll,
+                    // Make sure no decoration is set on the DataTable
+                    // from the theme, as its already wrapped in a Card.
+                    decoration: const BoxDecoration(),
+                    dataRowHeight: widget.dataRowHeight,
+                    headingRowHeight: widget.headingRowHeight,
+                    horizontalMargin: widget.horizontalMargin,
+                    columnSpacing: widget.columnSpacing,
+                    showCheckboxColumn: widget.showCheckboxColumn,
+                    showBottomBorder: true,
+                    rows: loading
+                        ? loadingRows(
+                            widget.rowsPerPage,
+                          )
+                        : _getRows(_firstRowIndex, widget.rowsPerPage),
                   ),
                 ),
                 if (!loading)
